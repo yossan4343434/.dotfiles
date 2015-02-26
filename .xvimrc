@@ -18,7 +18,9 @@ set expandtab
 set tabstop=4
 set shiftwidth=2
 set helplang=en
-colorscheme desert
+colorscheme evening
+
+noremap <C-j><C-j> /<C-u>$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$<CR><Esc>
 
 nnoremap L $
 nnoremap H ^

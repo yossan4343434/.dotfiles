@@ -20,6 +20,8 @@ set shiftwidth=2
 set helplang=en
 colorscheme desert
 
+noremap <C-j><C-j> :<C-u>nohlsearch<CR><Esc>
+
 nnoremap L $
 nnoremap H ^
 nnoremap <C-h> X
@@ -27,10 +29,8 @@ nnoremap <Space>o o<Esc>
 nnoremap ZZ <Nop>
 nnoremap ZQ <Nop>
 
-
 inoremap <C-p> <Up>
 inoremap <C-n> <Down>
 inoremap <C-b> <Left>
 inoremap <C-f> <Right>
 inoremap <C-j> <Esc>
-
