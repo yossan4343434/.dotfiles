@@ -20,7 +20,11 @@ set shiftwidth=2
 set helplang=en
 colorscheme evening
 
-noremap <Esc><Esc> /<C-u>&&&STOP_SEARCHING<CR><Esc>
+noremap <Esc><Esc> /<C-u>\\\\\\\\\\\\\\\\\\STOP_SEARCHING<CR><Esc>
+noremap w W
+noremap W w
+noremap b B 
+noremap B b
 noremap L $
 noremap H ^
 noremap <C-s> <C-a>
