@@ -60,6 +60,7 @@ NeoBundle 'Shougo/neomru.vim'
 NeoBundle 'tpope/vim-fugitive'
 NeoBundle 'tpote/vim-endwise'
 NeoBundle 'nathanaelkane/vim-indent-guides'
+NeoBundle 'kakkyz81/evervim'
 call neobundle#end()
 
 filetype plugin indent on
