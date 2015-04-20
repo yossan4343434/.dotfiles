@@ -140,3 +140,6 @@ fi
 # rbenvのパスの設定
 export PATH=$HOME/.rbenv/bin:$PATH
 eval "$(rbenv init -)"
+
+# .zshrc.localを反映
+[ -f ~/.zshrc.local ] && source ~/.zshrc.local
