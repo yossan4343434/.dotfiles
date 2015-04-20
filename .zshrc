@@ -136,3 +136,4 @@ elif which putclip >/dev/null 2>&1 ; then
 alias -g C='| putclip'
 fi
 
+[ -f ~/.zshrc.local ] && source ~/.zshrc.local
