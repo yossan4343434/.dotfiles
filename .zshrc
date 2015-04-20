@@ -9,9 +9,9 @@ colors
 bindkey -e
 
 # ヒストリの設定
-ISTFILE=~/.zsh_history
-ISTSIZE=1000000
-AVEHIST=1000000
+HISTFILE=~/.zsh_history
+HISTSIZE=100000
+SAVEHIST=1000000
 
 # プロンプト
 # 1行表示
@@ -136,3 +136,7 @@ elif which putclip >/dev/null 2>&1 ; then
 alias -g C='| putclip'
 fi
 
+########################################
+# rbenvのパスの設定
+export PATH=$HOME/.rbenv/bin:$PATH
+eval "$(rbenv init -)"
