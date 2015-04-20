@@ -12,6 +12,11 @@ bindkey -e
 HISTFILE=~/.zsh_history
 HISTSIZE=100000
 SAVEHIST=1000000
+setopt hist_no_store
+setopt share_history
+setopt append_history
+setopt extended_history
+setopt hist_verify
 
 # プロンプト
 # 1行表示
