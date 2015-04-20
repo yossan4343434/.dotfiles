@@ -8,6 +8,7 @@ set wildmenu
 set showcmd
 set showmatch
 highlight LineNr ctermfg=gray
+au BufRead, BufNewFile *md set filetype=markdown
 
 " Editor
 set autoindent
@@ -61,6 +62,9 @@ NeoBundle 'tpope/vim-fugitive'
 NeoBundle 'tpote/vim-endwise'
 NeoBundle 'nathanaelkane/vim-indent-guides'
 NeoBundle 'kakkyz81/evervim'
+NeoBundle 'plasticboy/vim-markdown'
+NeoBundle 'kannokanno/previm'
+NeoBundle 'tyru/open-browser.vim'
 call neobundle#end()
 
 filetype plugin indent on
@@ -88,11 +92,10 @@ set statusline+=%{fugitive#statusline()}
 
 " vim-indent-guides
 let g:indent_guides_enable_on_vim_startup = 1
-let g:indent_guides_start_level = 4
-let g:indent_guides_auto_colors = 0
-autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd ctermbg=100
-autocmd VimEnter,Colorscheme * :hi IndentGuidesEven ctermbg=234
-let g:indent_guides_guide_size = 1
+let g:indent_guides_auto_colors=0
+autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd   ctermbg=0
+autocmd VimEnter,Colorscheme * :hi IndentGuidesEven  ctermbg=235
+let g:indent_guides_guide_size=1
 
 " Change status-line-color while insert mode
 let g:hi_insert = 'highlight StatusLine guifg=darkblue guibg=darkyellow gui=none ctermfg=blue ctermbg=yellow cterm=none'
