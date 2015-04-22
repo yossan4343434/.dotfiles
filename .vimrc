@@ -44,7 +44,7 @@ inoremap <C-A> <Home>
 inoremap <C-E> <End>
 inoremap <C-D> <Del>
 
-" Setup NeoBundle
+" NeoBundle
 set nocompatible
 filetype off
 
@@ -65,27 +65,35 @@ NeoBundle 'kakkyz81/evervim'
 NeoBundle 'plasticboy/vim-markdown'
 NeoBundle 'kannokanno/previm'
 NeoBundle 'tyru/open-browser.vim'
+NeoBundle 'rking/ag.vim'
 call neobundle#end()
 
 filetype plugin indent on
 
 " Unite.vim
-let g:unite_enable_start_insert=1
+let g:unite_enable_start_insert = 1
+
+let g:unite_enable_ignore_case = 1
+let g:unite_enable_smart_case = 1
 
 noremap <C-P> :Unite buffer<CR>
 noremap <C-N> :Unite -buffer-name=file file<CR>
 noremap <C-Z> :Unite file_mru<CR>
-
 noremap :uff :<C-u>UniteWithBufferDir file -buffer-name=file<CR>
 
-au FileType unite nnoremap <silent> <buffer> <expr> <C-J> unite#do_action('split')
-au FileType unite inoremap <silent> <buffer> <expr> <C-J> unite#do_action('split')
+nnoremap <silent> <Space>g :<C-u>Unite grep:. -buffer-name=search-buffer<CR>
+nnoremap <silent> <Space>cg :<C-u>Unite grep:. -buffer-name=search-buffer<CR><C-R><C-W>
+nnoremap <silent> <Space>r :<C-u>UniteResume search-buffer<CR>
 
-au FileType unite nnoremap <silent> <buffer> <expr> <C-K> unite#do_action('vsplit')
-au FileType unite inoremap <silent> <buffer> <expr> <C-K> unite#do_action('vsplit')
+if executable('ag')
+	let g:unite_source_grep_command = 'ag'
+	let g:unite_source_grep_default_opts = '--nogroup --nocolor --column'
+	let g:unite_source_grep_recursive_opt = ''
+endif
 
-au FileType unite nnoremap <silent> <buffer> <ESC><ESC> :q<CR>
-au FileType unite inoremap <silent> <buffer> <ESC><ESC> <ESC>:q<CR>
+au FileType unite noremap <silent> <buffer> <expr> <C-J> unite#do_action('split')
+au FileType unite noremap <silent> <buffer> <expr> <C-K> unite#do_action('vsplit')
+au FileType unite noremap <silent> <buffer> <ESC><ESC> :q<CR>
 
 " vim-fugitive
 set statusline+=%{fugitive#statusline()}
