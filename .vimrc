@@ -9,6 +9,8 @@ set showcmd
 set showmatch
 highlight LineNr ctermfg=gray
 au BufRead, BufNewFile *md set filetype=markdown
+let &t_SI = "\<Esc>]50;CursorShape=1\x7"
+let &t_EI = "\<Esc>]50;CursorShape=0\x7"
 
 " Editor
 set autoindent
