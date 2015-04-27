@@ -16,8 +16,8 @@ let &t_EI = "\<Esc>]50;CursorShape=0\x7"
 set autoindent
 set smartindent
 set smarttab
-set tabstop=4
-set shiftwidth=4
+set tabstop=2
+set shiftwidth=2
 set cursorline
 set clipboard+=unnamed
 set backspace=indent,eol,start
