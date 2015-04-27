@@ -18,8 +18,9 @@ set smartindent
 set smarttab
 set tabstop=4
 set shiftwidth=4
-set autoindent
 set cursorline
+set clipboard+=unnamed
+set backspace=indent,eol,start
 highlight CursorLine cterm=bold
 
 " Search
