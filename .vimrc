@@ -1,6 +1,12 @@
-" Display
+" Basic
 colorscheme desert
 syntax on
+set nocompatible
+set autoread
+set noswapfile
+set hidden
+
+" Display
 set title
 set number
 set ruler
@@ -22,6 +28,7 @@ set tabstop=2
 set shiftwidth=2
 set cursorline
 set clipboard+=unnamed
+set clipboard=unnamed
 set backspace=indent,eol,start
 highlight CursorLine cterm=bold
 
@@ -107,8 +114,8 @@ set statusline+=%{fugitive#statusline()}
 " vim-indent-guides
 let g:indent_guides_enable_on_vim_startup = 1
 let g:indent_guides_auto_colors=0
-autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd   ctermbg=0
-autocmd VimEnter,Colorscheme * :hi IndentGuidesEven  ctermbg=235
+autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd   ctermbg=234
+autocmd VimEnter,Colorscheme * :hi IndentGuidesEven  ctermbg=233
 let g:indent_guides_guide_size=1
 
 " Change status-line-color while insert mode
