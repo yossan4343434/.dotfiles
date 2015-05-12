@@ -26,11 +26,9 @@ set expandtab
 set smarttab
 set tabstop=2
 set shiftwidth=2
-set cursorline
 set clipboard+=unnamed
 set clipboard=unnamed
 set backspace=indent,eol,start
-highlight CursorLine cterm=bold
 
 " Search
 set incsearch
