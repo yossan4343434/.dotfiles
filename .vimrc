@@ -44,6 +44,7 @@ noremap gj j
 noremap L $
 noremap H ^
 noremap <C-H> X
+noremap o A<CR>
 noremap <Space>o o<Esc>
 noremap ZZ <Nop>
 noremap ZQ <Nop>
