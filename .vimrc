@@ -1,6 +1,4 @@
 " Basic
-colorscheme desert
-syntax on
 set nocompatible
 set autoread
 set noswapfile
@@ -49,6 +47,8 @@ noremap <C-H> X
 noremap <Space>o o<Esc>
 noremap ZZ <Nop>
 noremap ZQ <Nop>
+nnoremap ; :
+nnoremap : ;
 inoremap <C-B> <Left>
 inoremap <C-F> <Right>
 inoremap <C-A> <Home>
@@ -60,7 +60,7 @@ set nocompatible
 filetype off
 
 if has('vim_starting')
-	set runtimepath+=~/.vim/bundle/neobundle.vim
+  set runtimepath+=~/.vim/bundle/neobundle.vim
 endif
 
 call neobundle#begin(expand('~/.vim/bundle/'))
@@ -72,16 +72,22 @@ NeoBundle 'Shougo/neomru.vim'
 NeoBundle 'tpope/vim-fugitive'
 NeoBundle 'tpote/vim-endwise'
 NeoBundle 'nathanaelkane/vim-indent-guides'
-NeoBundle 'kakkyz81/evervim'
 NeoBundle 'plasticboy/vim-markdown'
 NeoBundle 'kannokanno/previm'
 NeoBundle 'tyru/open-browser.vim'
 NeoBundle 'rking/ag.vim'
+NeoBundle 'tomtom/tcomment_vim'
+NeoBundle 'Townk/vim-autoclose'
+NeoBundle 'alpaca-tc/alpaca_powertabline'
+NeoBundle 'Lokaltog/powerline', { 'rtp': 'powerline/bindings/vim' }
+NeoBundle 'Lokaltog/powerline-fontpatcher'
+NeoBundle 'altog/powerline-fontpatcher'
+NeoBundle has('lua') ? 'Shougo/neocomplete' : 'Shougo/neocomplcache'
 call neobundle#end()
 
 filetype plugin indent on
 
-" Unite.vim
+" unite.vim
 let g:unite_enable_start_insert = 1
 
 let g:unite_enable_ignore_case = 1
@@ -89,24 +95,29 @@ let g:unite_enable_smart_case = 1
 
 noremap <C-P> :Unite buffer<CR>
 noremap <C-N> :Unite -buffer-name=file file<CR>
-noremap <C-Z> :Unite file_mru<CR>
-noremap :uff :<C-u>UniteWithBufferDir file -buffer-name=file<CR>
+noremap <C-B> :Unite file_mru<CR>
+noremap <C-F> :<C-u>UniteWithBufferDir file -buffer-name=file<CR>
 
 nnoremap <silent> <Space>g :<C-u>Unite grep:. -buffer-name=search-buffer<CR>
 nnoremap <silent> <Space>cg :<C-u>Unite grep:. -buffer-name=search-buffer<CR><C-R><C-W>
-nnoremap <silent> <Space>r :<C-u>UniteResume search-buffer<CR>
 
 if executable('ag')
-	let g:unite_source_grep_command = 'ag'
-	let g:unite_source_grep_default_opts = '--nogroup --nocolor --column'
-	let g:unite_source_grep_recursive_opt = ''
+  let g:unite_source_grep_command = 'ag'
+  let g:unite_source_grep_default_opts = '--nogroup --nocolor --column'
+  let g:unite_source_grep_recursive_opt = ''
 endif
 
 au FileType unite noremap <silent> <buffer> <expr> <C-J> unite#do_action('split')
 au FileType unite noremap <silent> <buffer> <expr> <C-K> unite#do_action('vsplit')
 au FileType unite noremap <silent> <buffer> <ESC><ESC> :q<CR>
 
+" vimfiler
+let g:vimfiler_as_default_explorer = 1
+
+nnoremap <silent> <Space>fi :<C-u>VimFilerBufferDir -split -simple -winwidth=35 -no-quit<CR>
+
 " vim-fugitive
+autocmd QuickFixCmdPost *grep* cwindow
 set statusline+=%{fugitive#statusline()}
 
 " vim-indent-guides
@@ -116,33 +127,45 @@ autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd   ctermbg=235
 autocmd VimEnter,Colorscheme * :hi IndentGuidesEven  ctermbg=233
 let g:indent_guides_guide_size=1
 
-" Change status-line-color while insert mode
-let g:hi_insert = 'highlight StatusLine guifg=darkblue guibg=darkyellow gui=none ctermfg=blue ctermbg=yellow cterm=none'
+" powerline
+let g:Powerline_symbols = 'compatible'
 
-if has('syntax')
-	augroup InsertHook
-		autocmd!
-		autocmd InsertEnter * call s:StatusLine('Enter')
-		autocmd InsertLeave * call s:StatusLine('Leave')
-	augroup END
+set t_Co=256
+
+" neocomplete
+let g:acp_enableAtStartup = 0
+let g:neocomplcache_enable_at_startup = 1
+let g:neocomplete_enable_smart_case = 1
+let g:neocomplcache_min_syntax_length = 3
+let g:neocomplcache_lock_buffer_name_pattern = '\*ku\*'
+
+let g:neocomplcache_dictionary_filetype_lists = {
+  \ 'default' : '',
+  \ 'vimshell' : $HOME.'/.vimshell_hist',
+  \ 'scheme' : $HOME.'/.gosh_completions'
+    \ }
+
+if !exists('g:neocomplcache_keyword_patterns')
+  let g:neocomplcache_keyword_patterns = {}
 endif
+let g:neocomplcache_keyword_patterns['default'] = '\h\w*'
 
-let s:slhlcmd = ''
-function! s:StatusLine(mode)
-	if a:mode == 'Enter'
-		silent! let s:slhlcmd = 'highlight ' . s:GetHighlight('StatusLine')
-		silent exec g:hi_insert
-	else
-		highlight clear StatusLine
-		silent exec s:slhlcmd
-  	endif
+inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
+function! s:my_cr_function()
+  return neocomplcache#smart_close_popup() . "\<CR>"
 endfunction
 
-function! s:GetHighlight(hi)
-	redir => hl
-		exec 'highlight '.a:hi
-	redir END
-	let hl = substitute(hl, '[\r\n]', '', 'g')
-	let hl = substitute(hl, 'xxx', '', '')
-	return hl
-endfunction
+inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+inoremap <expr><BS> neocomplcache#smart_close_popup()."\<C-h>"
+inoremap <expr><C-y>  neocomplcache#close_popup()
+inoremap <expr><C-e>  neocomplcache#cancel_popup()
+
+autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
+autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
+autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
+autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+
+" Theme
+colorscheme hybrid
+syntax on
