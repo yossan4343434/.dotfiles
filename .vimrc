@@ -173,7 +173,7 @@ let g:yankround_max_history = 100
 nmap p <Plug>(yankround-p)
 nmap P <Plug>(yankround-P)
 nmap <C-]> <Plug>(yankround-prev)
-nmap <C-n> <Plug>(yankround-next)
+nmap <C-[> <Plug>(yankround-next)
 
 " quickrun
 let g:quickrun_config = {
