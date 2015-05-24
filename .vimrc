@@ -54,7 +54,7 @@ nnoremap : ;
 nnoremap n nzz
 nnoremap N Nzz
 nnoremap * *zz
-nnoremap <C-O> o<Esc>
+nnoremap <silent> <Space>o o<Esc>
 inoremap <C-B> <Left>
 inoremap <C-F> <Right>
 inoremap <C-A> <Home>
@@ -117,7 +117,7 @@ au FileType unite noremap <silent> <buffer> <ESC><ESC> :q<CR>
 " vimfiler
 let g:vimfiler_as_default_explorer = 1
 
-nnoremap <silent> <Space>o :<C-U>VimFilerBufferDir -split -simple -winwidth=35 -no-quit<CR>
+nnoremap <C-O> :<C-U>VimFilerBufferDir -split -simple -winwidth=35 -no-quit<CR>
 
 au FileType vimfiler noremap <silent> <buffer> <ESC><ESC> :q<CR>
 
@@ -173,7 +173,7 @@ let g:yankround_max_history = 100
 nmap p <Plug>(yankround-p)
 nmap P <Plug>(yankround-P)
 nmap <C-]> <Plug>(yankround-prev)
-nmap <C-[> <Plug>(yankround-next)
+nmap <C-n> <Plug>(yankround-next)
 
 " quickrun
 let g:quickrun_config = {
@@ -183,6 +183,8 @@ let g:quickrun_config = {
 \     "outputter/buffer" : "quickfix"
 \   }
 \ }
+
+au FileType quickrun noremap <silent> <buffer> <ESC><ESC> :q<CR>
 
 " vim-easy-align
 vmap <CR> <Plug>(EasyAlign)
