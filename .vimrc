@@ -3,6 +3,7 @@ set nocompatible
 set autoread
 set noswapfile
 set hidden
+set noerrorbells
 
 " Display
 set title
@@ -12,6 +13,7 @@ set wildmenu
 set showcmd
 set showmatch
 set laststatus=2
+set scrolloff=5
 highlight LineNr ctermfg=gray
 au BufRead, BufNewFile *md set filetype=markdown
 let &t_SI = "\<Esc>]50;CursorShape=1\x7"
@@ -45,19 +47,21 @@ noremap L $
 noremap H ^
 noremap <C-H> X
 noremap o A<CR>
-noremap <Space>o o<Esc>
 noremap ZZ <Nop>
 noremap ZQ <Nop>
 nnoremap ; :
 nnoremap : ;
+nnoremap n nzz
+nnoremap N Nzz
+nnoremap * *zz
+nnoremap <C-O> o<Esc>
 inoremap <C-B> <Left>
 inoremap <C-F> <Right>
 inoremap <C-A> <Home>
 inoremap <C-E> <End>
 inoremap <C-D> <Del>
 
-" NeoBundle
-set nocompatible
+" neobundle
 filetype off
 
 if has('vim_starting')
@@ -81,26 +85,27 @@ NeoBundle 'tomtom/tcomment_vim'
 NeoBundle 'Townk/vim-autoclose'
 NeoBundle 'alpaca-tc/alpaca_powertabline'
 NeoBundle 'Lokaltog/powerline', { 'rtp': 'powerline/bindings/vim' }
-NeoBundle 'Lokaltog/powerline-fontpatcher'
-NeoBundle 'altog/powerline-fontpatcher'
-NeoBundle has('lua') ? 'Shougo/neocomplete' : 'Shougo/neocomplcache'
+NeoBundle 'LeafCage/yankround.vim'
+NeoBundle 'thinca/vim-quickrun'
+NeoBundle 'junegunn/vim-easy-align'
+NeoBundle 'Shougo/neocomplete'
+NeoBundle 'Shougo/neosnippet'
+NeoBundle 'Shougo/neosnippet-snippets'
 call neobundle#end()
 
 filetype plugin indent on
 
 " unite.vim
 let g:unite_enable_start_insert = 1
-
 let g:unite_enable_ignore_case = 1
 let g:unite_enable_smart_case = 1
 
-noremap <C-P> :Unite buffer<CR>
-noremap <C-N> :Unite -buffer-name=file file<CR>
-noremap <C-B> :Unite file_mru<CR>
-noremap <C-F> :<C-u>UniteWithBufferDir file -buffer-name=file<CR>
-
-nnoremap <silent> <Space>g :<C-u>Unite grep:. -buffer-name=search-buffer<CR>
-nnoremap <silent> <Space>cg :<C-u>Unite grep:. -buffer-name=search-buffer<CR><C-R><C-W>
+nnoremap <silent> <Space>p :Unite buffer<CR>
+nnoremap <silent> <Space>n :Unite -buffer-name=file file<CR>
+nnoremap <silent> <Space>f :<C-U>UniteWithBufferDir file -buffer-name=file<CR>
+nnoremap <silent> <Space>b :Unite file_mru<CR>
+nnoremap <silent> <Space>g :<C-U>Unite grep:. -buffer-name=search-buffer<CR>
+nnoremap <silent> <Space>cg :<C-U>Unite grep:. -buffer-name=search-buffer<CR><C-R><C-W>
 
 if executable('ag')
   let g:unite_source_grep_command = 'ag'
@@ -108,14 +113,14 @@ if executable('ag')
   let g:unite_source_grep_recursive_opt = ''
 endif
 
-au FileType unite noremap <silent> <buffer> <expr> <C-J> unite#do_action('split')
-au FileType unite noremap <silent> <buffer> <expr> <C-K> unite#do_action('vsplit')
 au FileType unite noremap <silent> <buffer> <ESC><ESC> :q<CR>
 
 " vimfiler
 let g:vimfiler_as_default_explorer = 1
 
-nnoremap <silent> <Space>fi :<C-u>VimFilerBufferDir -split -simple -winwidth=35 -no-quit<CR>
+nnoremap <silent> <Space>o :<C-U>VimFilerBufferDir -split -simple -winwidth=35 -no-quit<CR>
+
+au FileType vimfiler noremap <silent> <buffer> <ESC><ESC> :q<CR>
 
 " vim-fugitive
 autocmd QuickFixCmdPost *grep* cwindow
@@ -124,9 +129,10 @@ set statusline+=%{fugitive#statusline()}
 " vim-indent-guides
 let g:indent_guides_enable_on_vim_startup = 1
 let g:indent_guides_auto_colors=0
-autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd   ctermbg=235
-autocmd VimEnter,Colorscheme * :hi IndentGuidesEven  ctermbg=233
 let g:indent_guides_guide_size=1
+
+autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd   ctermbg=237
+autocmd VimEnter,Colorscheme * :hi IndentGuidesEven  ctermbg=235
 
 " powerline
 let g:Powerline_symbols = 'compatible'
@@ -137,35 +143,50 @@ set t_Co=256
 let g:acp_enableAtStartup = 0
 let g:neocomplcache_enable_at_startup = 1
 let g:neocomplete_enable_smart_case = 1
+let g:neocomplcache_enable_underbar_completion = 1
+let g:neocomplete_use_vimproc = 1
 let g:neocomplcache_min_syntax_length = 3
 let g:neocomplcache_lock_buffer_name_pattern = '\*ku\*'
 
-let g:neocomplcache_dictionary_filetype_lists = {
-  \ 'default' : '',
-  \ 'vimshell' : $HOME.'/.vimshell_hist',
-  \ 'scheme' : $HOME.'/.gosh_completions'
-    \ }
+let g:neocomplete#sources#dictionary#dictionaries = {
+\   'default' : '',
+\   'vimshell' : $HOME.'/.vimshell_hist',
+\   'scheme' : $HOME.'/.gosh_completions'
+\ }
 
 if !exists('g:neocomplcache_keyword_patterns')
   let g:neocomplcache_keyword_patterns = {}
 endif
 let g:neocomplcache_keyword_patterns['default'] = '\h\w*'
 
-inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
-function! s:my_cr_function()
-  return neocomplcache#smart_close_popup() . "\<CR>"
-endfunction
-
-inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
-inoremap <expr><BS> neocomplcache#smart_close_popup()."\<C-h>"
-inoremap <expr><C-y>  neocomplcache#close_popup()
-inoremap <expr><C-e>  neocomplcache#cancel_popup()
+inoremap <expr><TAB>  pumvisible() ? "\<C-N>" : "\<TAB>"
+inoremap <expr><BS> neocomplcache#smart_close_popup()."\<C-H>"
 
 autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
 autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
 autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
 autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
 autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+
+" yankround.vim
+let g:yankround_max_history = 100
+
+nmap p <Plug>(yankround-p)
+nmap P <Plug>(yankround-P)
+nmap <C-p> <Plug>(yankround-prev)
+nmap <C-n> <Plug>(yankround-next)
+
+" quickrun
+let g:quickrun_config = {
+\   "_" : {
+\     "outputter/buffer/split" : "botright 8sp",
+\     "outputter/buffer/close_on_empty" : 1,
+\     "outputter/buffer" : "quickfix"
+\   }
+\ }
+
+" vim-easy-align
+vmap <CR> <Plug>(EasyAlign)
 
 " Theme
 colorscheme hybrid
