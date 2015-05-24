@@ -82,7 +82,6 @@ NeoBundle 'kannokanno/previm'
 NeoBundle 'tyru/open-browser.vim'
 NeoBundle 'rking/ag.vim'
 NeoBundle 'tomtom/tcomment_vim'
-NeoBundle 'Townk/vim-autoclose'
 NeoBundle 'alpaca-tc/alpaca_powertabline'
 NeoBundle 'Lokaltog/powerline', { 'rtp': 'powerline/bindings/vim' }
 NeoBundle 'LeafCage/yankround.vim'
@@ -100,12 +99,12 @@ let g:unite_enable_start_insert = 1
 let g:unite_enable_ignore_case = 1
 let g:unite_enable_smart_case = 1
 
-nnoremap <silent> <Space>p :Unite buffer<CR>
-nnoremap <silent> <Space>n :Unite -buffer-name=file file<CR>
-nnoremap <silent> <Space>f :<C-U>UniteWithBufferDir file -buffer-name=file<CR>
-nnoremap <silent> <Space>b :Unite file_mru<CR>
-nnoremap <silent> <Space>g :<C-U>Unite grep:. -buffer-name=search-buffer<CR>
-nnoremap <silent> <Space>cg :<C-U>Unite grep:. -buffer-name=search-buffer<CR><C-R><C-W>
+nnoremap <C-P> :Unite buffer<CR>
+nnoremap <C-N> :Unite -buffer-name=file file<CR>
+nnoremap <C-F> :<C-U>UniteWithBufferDir file -buffer-name=file<CR>
+nnoremap <C-B> :Unite file_mru<CR>
+nnoremap <C-G> :<C-U>Unite grep:. -buffer-name=search-buffer<CR>
+nnoremap <silent> <Space>g :<C-U>Unite grep:. -buffer-name=search-buffer<CR><C-R><C-W>
 
 if executable('ag')
   let g:unite_source_grep_command = 'ag'
@@ -173,8 +172,8 @@ let g:yankround_max_history = 100
 
 nmap p <Plug>(yankround-p)
 nmap P <Plug>(yankround-P)
-nmap <C-p> <Plug>(yankround-prev)
-nmap <C-n> <Plug>(yankround-next)
+nmap <C-]> <Plug>(yankround-prev)
+nmap <C-[> <Plug>(yankround-next)
 
 " quickrun
 let g:quickrun_config = {
