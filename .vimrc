@@ -38,6 +38,7 @@ set wrapscan
 noremap <Esc><Esc> :<C-u>nohlsearch<CR><Esc>
 
 " Keymap
+noremap <Space> :w<CR>
 noremap k gk
 noremap j gj
 noremap gk k
