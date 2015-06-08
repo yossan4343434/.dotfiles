@@ -90,6 +90,8 @@ NeoBundle 'junegunn/vim-easy-align'
 NeoBundle 'Shougo/neocomplete'
 NeoBundle 'Shougo/neosnippet'
 NeoBundle 'Shougo/neosnippet-snippets'
+NeoBundle 'chriskempson/vim-tomorrow-theme'
+NeoBundle 'nanotech/jellybeans.vim'
 call neobundle#end()
 
 filetype plugin indent on
