@@ -4,6 +4,7 @@ set autoread
 set noswapfile
 set hidden
 set noerrorbells
+set guioptions-=m
 
 " Display
 set title
