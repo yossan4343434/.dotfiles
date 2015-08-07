@@ -5,6 +5,7 @@ set noswapfile
 set hidden
 set noerrorbells
 set guioptions-=m
+set vb t_vb=
 
 " Display
 set title
