@@ -51,11 +51,9 @@ noremap <C-H> X
 noremap o A<CR>
 noremap ZZ <Nop>
 noremap ZQ <Nop>
-nnoremap ; :
-nnoremap : ;
 nnoremap n nzz
 nnoremap N Nzz
-nnoremap * *zz
+nnoremap *
 nnoremap <silent> <Space>o o<Esc>
 inoremap <C-B> <Left>
 inoremap <C-F> <Right>
