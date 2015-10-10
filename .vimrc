@@ -6,6 +6,7 @@ set hidden
 set noerrorbells
 set guioptions-=m
 set vb t_vb=
+set backupdir=~/.vim/tmp
 
 " Display
 set title
@@ -51,9 +52,6 @@ noremap <C-H> X
 noremap o A<CR>
 noremap ZZ <Nop>
 noremap ZQ <Nop>
-nnoremap n nzz
-nnoremap N Nzz
-nnoremap *
 nnoremap <silent> <Space>o o<Esc>
 inoremap <C-B> <Left>
 inoremap <C-F> <Right>
@@ -194,3 +192,4 @@ vmap <CR> <Plug>(EasyAlign)
 " Theme
 colorscheme hybrid
 syntax on
+hi Visual  guifg=#0000FF guibg=#FFFF00 gui=none
