@@ -97,4 +97,3 @@ setopt hist_verify
 
 # local
 [ -f ~/.zshrc.local ] && source ~/.zshrc.local
-
