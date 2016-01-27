@@ -158,7 +158,6 @@ endif
 let g:neocomplcache_keyword_patterns['default'] = '\h\w*'
 
 inoremap <expr><TAB>  pumvisible() ? "\<C-N>" : "\<TAB>"
-inoremap <expr><BS> neocomplcache#smart_close_popup()."\<C-H>"
 
 autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
 autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
