@@ -47,6 +47,7 @@ zplug "sindresorhus/pure"
 zplug "zsh-users/zsh-syntax-highlighting"
 zplug "zsh-users/zsh-completions"
 zplug "zsh-users/zsh-history-substring-search"
+zplug "b4b4r07/enhancd", use:init.sh
 zplug "rupa/z", use:"*.sh"
 
 if ! zplug check --verbose; then
@@ -57,6 +58,10 @@ if ! zplug check --verbose; then
 fi
 
 zplug load
+
+# enhancd
+export ENHANCD_COMMAND=ed
+export ENHANCD_FILTER=ENHANCD_FILTER=fzy:fzf:peco
 
 # peco
 function peco-history-selection() {
@@ -84,3 +89,8 @@ function peco-z-search
   fi
 }
 zle -N peco-z-search
+
+# others
+## add color to ls command
+export CLICOLOR=1
+zstyle ':completion:*' list-colors di=34 ln=35 ex=31
