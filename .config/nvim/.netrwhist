@@ -1,9 +1,4 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =7
-let g:netrw_dirhist_1='/Users/yoshiyukikuga/works/Localendar_app/app/views/admin/pages'
-let g:netrw_dirhist_2='/Users/yoshiyukikuga/Dropbox/memo'
-let g:netrw_dirhist_3='/Users/yoshiyukikuga/Dropbox/memo/todai_rails'
-let g:netrw_dirhist_4='/Users/yoshiyukikuga/.zplug/repos/sindresorhus'
-let g:netrw_dirhist_5='/Users/yoshiyukikuga/.zplug/repos/sindresorhus/pure'
-let g:netrw_dirhist_6='/Users/yoshiyukikuga/.dotfile_archives'
-let g:netrw_dirhist_7='/Users/yoshiyukikuga/work/monero-wallet'
+let g:netrw_dirhist_cnt =2
+let g:netrw_dirhist_1='/Users/kuga/.zplug/.github'
+let g:netrw_dirhist_2='/Users/kuga/Applications'

@@ -75,7 +75,6 @@ if dein#load_state('~/.cache/dein')
   call dein#add('Shougo/neomru.vim')
   call dein#add('rking/ag.vim')
   call dein#add('Shougo/deoplete.nvim')
-  call dein#add('tpope/vim-fugitive')
   call dein#add('tpote/vim-endwise')
   call dein#add('nathanaelkane/vim-indent-guides')
   call dein#add('plasticboy/vim-markdown')
@@ -112,10 +111,6 @@ if executable('ag')
 endif
 
 au FileType unite noremap <silent> <buffer> <ESC><ESC> :q<CR>
-
-" vim-fugitive
-autocmd QuickFixCmdPost *grep* cwindow
-set statusline+=%{fugitive#statusline()}
 
 " vim-indent-guides
 let g:indent_guides_enable_on_vim_startup = 1

@@ -74,7 +74,6 @@ if dein#load_state('~/.cache/dein')
   call dein#add('Shougo/vimproc')
   call dein#add('Shougo/neomru.vim')
   call dein#add('rking/ag.vim')
-  call dein#add('Shougo/deoplete.nvim')
   call dein#add('tpope/vim-fugitive')
   call dein#add('tpote/vim-endwise')
   call dein#add('nathanaelkane/vim-indent-guides')
@@ -84,7 +83,6 @@ if dein#load_state('~/.cache/dein')
   call dein#add('tomtom/tcomment_vim')
   call dein#add('vim-airline/vim-airline')
   call dein#add('vim-airline/vim-airline-themes')
-  call dein#add('Shougo/deoplete.nvim')
 
   call dein#end()
   call dein#save_state()
@@ -124,6 +122,3 @@ let g:indent_guides_guide_size=1
 
 autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd   ctermbg=237
 autocmd VimEnter,Colorscheme * :hi IndentGuidesEven  ctermbg=235
-
-" deoplete
-let g:deoplete#enable_at_startup = 1
