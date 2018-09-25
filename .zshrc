@@ -1,5 +1,6 @@
 # env
 export XDG_CONFIG_HOME=~/.config
+export PATH=$PATH:/usr/local/go/bin
 
 #  language
 export LANGUAGE="en_US.UTF-8"

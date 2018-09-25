@@ -57,7 +57,7 @@ inoremap <C-E> <End>
 inoremap <C-D> <Del>
 
 " theme
-colorscheme hybrid
+colorscheme antares
 hi Visual guifg=#0000FF guibg=#FFFF00 gui=none
 
 " dein
