@@ -12,6 +12,7 @@ autocmd VimEnter * nnoremap <C-f> :<C-u>DeniteBufferDir file<CR>
 autocmd VimEnter * nnoremap <C-b> :<C-u>Denite file_mru<CR>
 noremap <C-y> :Denite neoyank -mode=normal<CR>
 noremap <C-g> :<C-u>Denite -auto_preview grep<CR>
+noremap <silent> <space>g :<C-u>DeniteCursorWord -auto_preview grep<CR>
 call denite#custom#map('insert', "<C-n>", '<denite:move_to_next_line>')
 call denite#custom#map('insert', "<C-p>", '<denite:move_to_previous_line>')
 '''
@@ -108,7 +109,7 @@ let g:tagbar_left        = 0
 let g:tagbar_width       = 30
 let g:tagbar_autoshowtag = 1
 let g:tagbar_autofocus   = 1
-autocmd VimEnter * nnoremap <C-t> :TagbarToggle<CR>
+autocmd VimEnter * nnoremap <C-o> :TagbarToggle<CR>
 '''
 
 # 自動()補完
