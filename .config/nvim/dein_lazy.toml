@@ -1,0 +1,70 @@
+# ヤンク履歴
+[[plugins]]
+repo     = 'Shougo/neoyank.vim'
+on_event = 'TextYankPost'
+
+# 補完
+[[plugins]]
+repo     = 'Shougo/deoplete.nvim'
+on_i     = 1
+hook_add = '''
+let g:deoplete#enable_at_startup = 1
+'''
+
+[[plugins]]
+repo        = 'zchee/deoplete-go'
+build       = 'make'
+on_ft       = 'go'
+hook_source = '''
+let g:deoplete#sources#go#sort_class = ['package', 'func', 'type', 'var', 'const']
+let g:deoplete#sources#go#gocode_binary = $GOPATH . '/bin/gocode'
+'''
+
+[[plugins]]
+repo  = 'fatih/vim-go'
+on_ft = 'go'
+hook_add = '''
+let g:go_highlight_functions = 1
+let g:go_highlight_methods = 1
+let g:go_highlight_fields = 1
+let g:go_highlight_types = 1
+let g:go_highlight_operators = 1
+let g:go_highlight_build_constraints = 1
+'''
+
+# html, css補完
+[[plugins]]
+repo  = 'mattn/emmet-vim'
+on_ft = ['html','htm','css']
+
+# jsシンタックスハイライト
+[[plugins]]
+repo             = 'billyvg/tigris.nvim'
+on_ft            = ['javascript', 'javascript.jsx']
+hook_post_update = '''
+let g:dein#plugin.build         = './install.sh'
+let g:tigris#enabled            = 1
+let g:tigris#on_the_fly_enabled = 1
+let g:tigris#delay              = 200
+'''
+
+# VueJSシンタックスハイライト
+[[plugins]]
+repo        = "posva/vim-vue"
+on_ft       = ["vue"]
+hook_source = '''
+autocmd FileType vue syntax sync fromstart
+'''
+
+# マークダウン
+[[plugins]]
+repo  = 'plasticboy/vim-markdown'
+on_ft = ['md']
+
+[[plugins]]
+repo  = 'kannokanno/previm'
+on_ft = ['md']
+
+[[plugins]]
+repo  = 'tyru/open-browser.vim'
+on_ft = ['md']

@@ -1,6 +1,7 @@
 # env
 export XDG_CONFIG_HOME=~/.config
 export PATH=$PATH:/usr/local/go/bin
+export GOPATH=$HOME/go
 
 #  language
 export LANGUAGE="en_US.UTF-8"
@@ -15,7 +16,7 @@ bindkey -e
 plugins=(git)
 
 # alias
-alias la='ls -a'
+alias la='ls -la'
 alias g=git
 alias ga='git add .'
 alias ra=rails
@@ -90,3 +91,10 @@ zle -N peco-z-search
 ## add color to ls command
 export CLICOLOR=1
 zstyle ':completion:*' list-colors di=34 ln=35 ex=31
+
+# tabtab source for serverless package
+# uninstall by removing these lines or running `tabtab uninstall serverless`
+[[ -f /usr/local/lib/node_modules/serverless/node_modules/tabtab/.completions/serverless.zsh ]] && . /usr/local/lib/node_modules/serverless/node_modules/tabtab/.completions/serverless.zsh
+# tabtab source for sls package
+# uninstall by removing these lines or running `tabtab uninstall sls`
+[[ -f /usr/local/lib/node_modules/serverless/node_modules/tabtab/.completions/sls.zsh ]] && . /usr/local/lib/node_modules/serverless/node_modules/tabtab/.completions/sls.zsh

@@ -1,0 +1,135 @@
+# plugin manager
+[[plugins]]
+repo = 'Shougo/dein.vim'
+
+# filer
+[[plugins]]
+repo     = 'Shougo/denite.nvim'
+hook_add = '''
+noremap <C-n> :Denite -mode=insert file<CR>
+noremap <C-p> :Denite -mode=normal buffer<CR>
+autocmd VimEnter * nnoremap <C-f> :<C-u>DeniteBufferDir file<CR>
+autocmd VimEnter * nnoremap <C-b> :<C-u>Denite file_mru<CR>
+noremap <C-y> :Denite neoyank -mode=normal<CR>
+noremap <C-g> :<C-u>Denite -auto_preview grep<CR>
+call denite#custom#map('insert', "<C-n>", '<denite:move_to_next_line>')
+call denite#custom#map('insert', "<C-p>", '<denite:move_to_previous_line>')
+'''
+hook_post_source = '''
+call denite#custom#var('file_rec', 'command', ['ag', '--follow', '--nocolor', '--nogroup', '-g', ''])
+call denite#custom#var('grep', 'command', ['ag'])
+call denite#custom#var('grep', 'recursive_opts', [])
+call denite#custom#var('grep', 'pattern_opt', [])
+call denite#custom#var('grep', 'default_opts', ['--follow', '--no-group', '--no-color'])
+'''
+
+# ファイル履歴の保存
+[[plugins]]
+repo = 'Shougo/neomru.vim'
+
+# 非同期処理
+[[plugins]]
+repo = 'Shougo/vimproc'
+
+# 検索
+[[plugins]]
+repo     = 'rking/ag.vim'
+hook_add = '''
+if executable('ag')
+  let g:unite_source_grep_command       = 'ag'
+  let g:unite_source_grep_default_opts  = '--nogroup --nocolor --column'
+  let g:unite_source_grep_recursive_opt = ''
+endif
+'''
+
+# インデント
+[[plugins]]
+repo     = 'nathanaelkane/vim-indent-guides'
+hook_add = '''
+let g:indent_guides_enable_on_vim_startup = 1
+let g:indent_guides_auto_colors           = 0
+let g:indent_guides_guide_size            = 1
+autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd   ctermbg = 237
+autocmd VimEnter,Colorscheme * :hi IndentGuidesEven  ctermbg = 235
+'''
+
+# パワーライン
+[[plugins]]
+repo = 'vim-airline/vim-airline'
+
+[[plugins]]
+repo = 'vim-airline/vim-airline-themes'
+
+# 移動系
+[[plugins]]
+repo = 'rhysd/accelerated-jk'
+
+[[plugins]]
+repo     = 'yuttie/comfortable-motion.vim'
+hook_add = '''
+let g:comfortable_motion_scroll_down_key = "j"
+let g:comfortable_motion_scroll_up_key   = "k"
+nnoremap <silent> <C-d> :call comfortable_motion#flick(100)<CR>
+nnoremap <silent> <C-u> :call comfortable_motion#flick(-100)<CR>
+'''
+
+# コメント
+[[plugins]]
+repo = 'tomtom/tcomment_vim'
+
+# Git
+[[plugins]]
+repo     = 'tpope/vim-fugitive'
+hook_add = '''
+autocmd QuickFixCmdPost *grep* cwindow
+set statusline+=%{fugitive#statusline()}
+'''
+
+# マルチカーソル
+[[plugins]]
+repo     = 'terryma/vim-multiple-cursors'
+hook_add = '''
+let g:multi_cursor_use_default_mapping = 0
+let g:multi_cursor_start_word_key      = '<C-i>'
+let g:multi_cursor_select_all_word_key = '<C-a>'
+let g:multi_cursor_start_key           = 'g<C-i>'
+let g:multi_cursor_select_all_key      = 'g<A-n>'
+let g:multi_cursor_next_key            = '<C-i>'
+let g:multi_cursor_prev_key            = '<C-x>'
+let g:multi_cursor_skip_key            = '<C-k>'
+let g:multi_cursor_quit_key            = '<Esc>'
+'''
+
+# タグバー
+[[plugins]]
+repo     = 'majutsushi/tagbar'
+hook_add = '''
+let g:tagbar_left        = 0
+let g:tagbar_width       = 30
+let g:tagbar_autoshowtag = 1
+let g:tagbar_autofocus   = 1
+autocmd VimEnter * nnoremap <C-t> :TagbarToggle<CR>
+'''
+
+# 自動()補完
+[[plugins]]
+repo = 'jiangmiao/auto-pairs'
+
+# 自動整列
+[[plugins]]
+repo     = 'junegunn/vim-easy-align'
+hook_add = '''
+xmap g <Plug>(EasyAlign)
+'''
+
+# シンタックスチェック
+[[plugins]]
+repo     = 'neomake/neomake'
+hook_add = '''
+autocmd! BufWritePost,BufEnter * Neomake
+let g:neomake_javascript_enabled_makers = ['eslint']
+'''
+
+# プログラム内のコンテクストからシンタックスハイライト
+[[plugins]]
+repo = 'Shougo/context_filetype.vim'
