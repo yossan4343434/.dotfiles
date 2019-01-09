@@ -7,10 +7,10 @@ repo = 'Shougo/dein.vim'
 repo     = 'Shougo/denite.nvim'
 hook_add = '''
 noremap <C-n> :Denite -mode=insert file<CR>
-noremap <C-p> :Denite -mode=normal buffer<CR>
+noremap <C-p> :Denite -mode=insert buffer<CR>
 autocmd VimEnter * nnoremap <C-f> :<C-u>DeniteBufferDir file<CR>
 autocmd VimEnter * nnoremap <C-b> :<C-u>Denite file_mru<CR>
-noremap <C-y> :Denite neoyank -mode=normal<CR>
+noremap <C-y> :Denite neoyank -mode=insert<CR>
 noremap <C-g> :<C-u>Denite -auto_preview grep<CR>
 noremap <silent> <space>g :<C-u>DeniteCursorWord -auto_preview grep<CR>
 call denite#custom#map('insert', "<C-n>", '<denite:move_to_next_line>')
@@ -61,10 +61,11 @@ repo = 'vim-airline/vim-airline'
 [[plugins]]
 repo = 'vim-airline/vim-airline-themes'
 
-# 移動系
+# 移動速度向上
 [[plugins]]
 repo = 'rhysd/accelerated-jk'
 
+# 慣性スクロール
 [[plugins]]
 repo     = 'yuttie/comfortable-motion.vim'
 hook_add = '''
