@@ -1,3 +1,10 @@
+# Source Prezto.
+if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
+  source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
+fi
+
+# Customize to your needs...
+
 # env
 export XDG_CONFIG_HOME=~/.config
 export PATH=$PATH:/usr/local/go/bin
@@ -11,6 +18,15 @@ export LC_CTYPE="${LANGUAGE}"
 
 # bindkey
 bindkey -e
+
+#コマンドをtypoしたときに聞きなおしてくれる
+setopt correct
+#表示を詰めてくれる
+setopt list_packed
+#beepを消す
+setopt nolistbeep
+#cdとlsの省略
+setopt auto_cd
 
 # git
 plugins=(git)
@@ -28,37 +44,26 @@ alias rdm='rails db:migrate'
 HISTFILE=~/.zsh_history
 HISTSIZE=1000000
 SAVEHIST=1000000
+
 setopt hist_no_store
 setopt share_history
 setopt append_history
 setopt extended_history
 setopt hist_verify
 
+# case insensitive
+zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'
+
 # anyenv
 if [ -d $HOME/.anyenv ] ; then
   export PATH="$HOME/.anyenv/bin:$PATH"
   eval "$(anyenv init -)"
+  # tmux対応
+  for D in `\ls $HOME/.anyenv/envs`
+  do
+    export PATH="$HOME/.anyenv/envs/$D/shims:$PATH"
+  done
 fi
-
-# zplug
-source ~/.zplug/init.zsh
-
-zplug "plugins/git", from:oh-my-zsh
-zplug "mafredri/zsh-async", from:github
-zplug "sindresorhus/pure"
-zplug "zsh-users/zsh-syntax-highlighting"
-zplug "zsh-users/zsh-completions"
-zplug "zsh-users/zsh-history-substring-search"
-zplug "rupa/z", use:"*.sh"
-
-if ! zplug check --verbose; then
-  printf "Install? [y/N]: "
-  if read -q; then
-    echo; zplug install
-  fi
-fi
-
-zplug load
 
 # peco
 function peco-history-selection() {
@@ -91,10 +96,3 @@ zle -N peco-z-search
 ## add color to ls command
 export CLICOLOR=1
 zstyle ':completion:*' list-colors di=34 ln=35 ex=31
-
-# tabtab source for serverless package
-# uninstall by removing these lines or running `tabtab uninstall serverless`
-[[ -f /usr/local/lib/node_modules/serverless/node_modules/tabtab/.completions/serverless.zsh ]] && . /usr/local/lib/node_modules/serverless/node_modules/tabtab/.completions/serverless.zsh
-# tabtab source for sls package
-# uninstall by removing these lines or running `tabtab uninstall sls`
-[[ -f /usr/local/lib/node_modules/serverless/node_modules/tabtab/.completions/sls.zsh ]] && . /usr/local/lib/node_modules/serverless/node_modules/tabtab/.completions/sls.zsh

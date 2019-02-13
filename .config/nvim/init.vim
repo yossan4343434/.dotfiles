@@ -55,10 +55,13 @@ nnoremap <silent> <Space>o o<Esc>
 
 nnoremap n nzz
 nnoremap N Nzz
-nnoremap * *zz
+nnoremap * *N
 nnoremap # #zz
 nnoremap g* g*zz
 nnoremap g# g#zz
+
+nnoremap ; :
+nnoremap : ;
 
 inoremap <C-B> <Left>
 inoremap <C-F> <Right>

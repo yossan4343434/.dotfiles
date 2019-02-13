@@ -10,7 +10,6 @@ noremap <C-n> :Denite -mode=insert file<CR>
 noremap <C-p> :Denite -mode=insert buffer<CR>
 autocmd VimEnter * nnoremap <C-f> :<C-u>DeniteBufferDir file<CR>
 autocmd VimEnter * nnoremap <C-b> :<C-u>Denite file_mru<CR>
-noremap <C-y> :Denite neoyank -mode=insert<CR>
 noremap <C-g> :<C-u>Denite -auto_preview grep<CR>
 noremap <silent> <space>g :<C-u>DeniteCursorWord -auto_preview grep<CR>
 call denite#custom#map('insert', "<C-n>", '<denite:move_to_next_line>')
@@ -93,12 +92,12 @@ repo     = 'terryma/vim-multiple-cursors'
 hook_add = '''
 let g:multi_cursor_use_default_mapping = 0
 let g:multi_cursor_start_word_key      = '<C-i>'
-let g:multi_cursor_select_all_word_key = '<C-a>'
+let g:multi_cursor_select_all_word_key = '<C-i>a'
 let g:multi_cursor_start_key           = 'g<C-i>'
 let g:multi_cursor_select_all_key      = 'g<A-n>'
 let g:multi_cursor_next_key            = '<C-i>'
-let g:multi_cursor_prev_key            = '<C-x>'
-let g:multi_cursor_skip_key            = '<C-k>'
+let g:multi_cursor_prev_key            = '<C-k>'
+let g:multi_cursor_skip_key            = '<C-s>'
 let g:multi_cursor_quit_key            = '<Esc>'
 '''
 

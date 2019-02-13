@@ -1,8 +1,3 @@
-# ヤンク履歴
-[[plugins]]
-repo     = 'Shougo/neoyank.vim'
-on_event = 'TextYankPost'
-
 # 補完
 [[plugins]]
 repo     = 'Shougo/deoplete.nvim'
